@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTICAL eyecare - Medical History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f6f9;
+            overflow: hidden;
+        }
+
+        /* ====== LEFT SIDEBAR ====== */
+        .sidebar {
+            width: 260px;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-brand h1 { font-size: 20px; color: #fff; font-weight: bold; }
+        .sidebar-brand span { font-size: 11px; color: #00d2ff; text-transform: uppercase; display: block; }
+
+        .sidebar-menu { list-style: none; padding: 20px 0; flex-grow: 1; }
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 24px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: #334155;
+            color: #fff;
+            border-left: 4px solid #00d2ff;
+        }
+
+        /* ====== MAIN CONTENT AREA ====== */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header Navbar */
+        .top-navbar {
+            height: 70px;
+            background-color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .nav-btn-dash { color: #334155; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .nav-btn-dash:hover { color: #00d2ff; }
+        .nav-btn-logout { background-color: #ef4444; color: white; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .nav-btn-logout:hover { background-color: #dc2626; }
+
+        /* Dashboard Content Container */
+        .content-body {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #e74c3c;
+        }
+
+        /* ====== HISTORY PAGE LAYOUT ====== */
+        .history-container {
+            display: grid;
+            grid-template-columns: 1.1fr 1.9fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        /* Form styling */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #334155; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .form-group input[type="file"] { padding: 5px; background: #f8fafc; }
+        
+        .upload-btn { background: #e74c3c; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
+        .upload-btn:hover { background: #c0392b; }
+
+        /* Table Styling */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        th { background-color: #f8fafc; color: #334155; font-weight: 600; }
+        
+        .download-btn {
+            background: #1e293b; color: #00d2ff; border: none; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .download-btn:hover { background: #334155; color: white; }
+
+        /* ====== SYSTEM FOOTER ====== */
+        .system-footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR MENU -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                <i class="fas fa-glasses" style="font-size: 32px; color: #00d2ff;"></i>
+                <div>
+                    <h1>OPTICAL</h1>
+                    <span>eyecare system</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fas fa-th-large"></i> Overview Home</a></li>
+                <li><a href="inventory.html"><i class="fas fa-store"></i> Glasses Store</a></li>
+                <li><a href="booking.html"><i class="fas fa-user-md"></i> Doctor Booking</a></li>
+                <li><a href="history.html" class="active"><i class="fas fa-notes-medical"></i> Medical History</a></li>
+                <li><a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+        
+        <!-- TOP NAVBAR -->
+        <header class="top-navbar">
+            <a href="dashboard.html" class="nav-btn-dash"><i class="fas fa-user-circle" style="font-size: 20px;"></i> Dashboard</a>
+            <a href="login.html" class="nav-btn-logout">Logout</a>
+        </header>
+
+        <!-- BODY CONTENT -->
+        <div class="content-body">
+            <div>
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <h2>Patient Medical History & Reports</h2>
+                    <p>Securely upload, store, and manage your past optical prescriptions, diagnoses, and eye testing reports.</p>
+                </div>
+
+                <!-- HISTORY LAYOUT SECTION -->
+                <div class="history-container">
+                    
+                    <!-- Left Panel: Upload Form -->
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-cloud-upload-alt" style="color:#e74c3c;"></i> Upload Document</h3>
+                        <form onsubmit="handleUpload(event)">
+                            <div class="form-group">
+                                <label>Document Title</label>
+                                <input type="text" id="docTitle" required placeholder="Ex: Eye Prescription 2026">
+                            </div>
+                            <div class="form-group">
+                                <label>Report Category</label>
+                                <select id="docCategory" required>
+                                    <option value="">-- Select Type --</option>
+                                    <option value="Doctor Prescription">Doctor Prescription</option>
+                                    <option value="Vision Test Report">Vision Test Report</option>
+                                    <option value="Lab / Scan Report">Lab / Scan Report</option>
+                                    <option value="Bill / Invoice">Bill / Invoice</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select File (PDF, PNG, JPG)</label>
+                                <input type="file" required accept=".pdf, .png, .jpg, .jpeg">
+                            </div>
+                            <button type="submit" class="upload-btn">Upload to Secure Cloud</button>
+                        </form>
+                    </div>
+
+                    <!-- Right Panel: Medical History Table -->
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 5px;"><i class="fas fa-folder-open"></i> Saved Optical Records</h3>
+                        <p style="color: #64748b; font-size: 13px; margin-bottom: 15px;">Your uploaded health documents are listed here chronologically.</p>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>Category</th>
+                                    <th>Uploaded Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <tr>
+                                    <td style="font-weight: 600; color: #334155;">Initial Eye Checkup Report</td>
+                                    <td>Vision Test Report</td>
+                                    <td>2026-04-10</td>
+                                    <td><button class="download-btn" onclick="alert('Downloading Document...')"><i class="fas fa-download"></i> View PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600; color: #334155;">Dr. Anura Perera - Prescription</td>
+                                    <td>Doctor Prescription</td>
+                                    <td>2026-05-15</td>
+                                    <td><button class="download-btn" onclick="alert('Downloading Document...')"><i class="fas fa-download"></i> View PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SYSTEM FOOTER -->
+            <footer class="system-footer">
+                <p>&copy; 2026 OPTICAL Eyecare Management System. All Rights Reserved.</p>
+                <p style="font-size: 12px; color: #94a3b8;">HNDIT Software Engineering Project</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ====== JAVASCRIPT FOR LIVE UPLOAD SIMULATION ====== -->
+    <script>
+        function handleUpload(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('docTitle').value;
+            const category = document.getElementById('docCategory').value;
+            const today = new Date().toISOString().split('T')[0];
+
+            // 1. Success Message Pop-up
+            alert(`🎉 Upload Successful!\n\n"${title}" has been safely uploaded and encrypted in the system database.`);
+
+            // 2. Table Live Add Page Refresh 
+            const tableBody = document.getElementById('historyTableBody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td style="font-weight: 600; color: #334155;">${title}</td>
+                <td>${category}</td>
+                <td>${today}</td>
+                <td><button class="download-btn" onclick="alert('Downloading Document...')"><i class="fas fa-download"></i> View PDF</button></td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild); 
+
+            // 3. Reset form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

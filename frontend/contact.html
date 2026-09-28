@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTICAL eyecare - Contact Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f6f9;
+            overflow: hidden;
+        }
+
+        /* ====== LEFT SIDEBAR ====== */
+        .sidebar {
+            width: 260px;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-brand h1 { font-size: 20px; color: #fff; font-weight: bold; }
+        .sidebar-brand span { font-size: 11px; color: #00d2ff; text-transform: uppercase; display: block; }
+
+        .sidebar-menu { list-style: none; padding: 20px 0; flex-grow: 1; }
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 24px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: #334155;
+            color: #fff;
+            border-left: 4px solid #00d2ff;
+        }
+
+        /* ====== MAIN CONTENT AREA ====== */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header Navbar */
+        .top-navbar {
+            height: 70px;
+            background-color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .nav-btn-dash { color: #334155; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .nav-btn-dash:hover { color: #00d2ff; }
+        .nav-btn-logout { background-color: #ef4444; color: white; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .nav-btn-logout:hover { background-color: #dc2626; }
+
+        /* Dashboard Content Container */
+        .content-body {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #2c3e50;
+        }
+
+        /* ====== CONTACT PAGE LAYOUT ====== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        /* Contact Details Details */
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: #1e293b;
+            color: #00d2ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        /* Form styling */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #334155; font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .form-group textarea { resize: none; height: 100px; }
+        .submit-btn { background: #1e293b; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
+        .submit-btn:hover { background: #334155; color: #00d2ff; }
+
+        /* ====== SYSTEM FOOTER ====== */
+        .system-footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                <i class="fas fa-glasses" style="font-size: 32px; color: #00d2ff;"></i>
+                <div>
+                    <h1>OPTICAL</h1>
+                    <span>eyecare system</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fas fa-th-large"></i> Overview Home</a></li>
+                <li><a href="inventory.html"><i class="fas fa-store"></i> Glasses Store</a></li>
+                <li><a href="booking.html"><i class="fas fa-user-md"></i> Doctor Booking</a></li>
+                <li><a href="history.html"><i class="fas fa-notes-medical"></i> Medical History</a></li>
+                <li><a href="contact.html" class="active"><i class="fas fa-headset"></i> Contact Support</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <header class="top-navbar">
+            <a href="dashboard.html" class="nav-btn-dash"><i class="fas fa-user-circle" style="font-size: 20px;"></i> Dashboard</a>
+            <a href="login.html" class="nav-btn-logout">Logout</a>
+        </header>
+
+        <div class="content-body">
+            <div>
+                <div class="welcome-banner">
+                    <h2>Help & Technical Support</h2>
+                    <p>Have an inquiry, experiencing system dashboard bugs, or need to contact the System Admin? Send us a request.</p>
+                </div>
+
+                <div class="contact-container">
+                    
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-building" style="color: #1e293b;"></i> Support Hotlines</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div><h4 style="font-size:14px;">Call Center</h4><p style="color: #64748b; font-size:13px;">+94 11 234 5678</p></div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                            <div><h4 style="font-size:14px;">Email Admin</h4><p style="color: #64748b; font-size:13px;">support@opticaleyecare.com</p></div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div><h4 style="font-size:14px;">Head Office</h4><p style="color: #64748b; font-size:12px;">No 120, Galle Road, Colombo 03.</p></div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-clock"></i></div>
+                            <div><h4 style="font-size:14px;">Operating Hours</h4><p style="color: #64748b; font-size:12px;">Mon - Sat (8.00 AM - 6.00 PM)</p></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-paper-plane"></i> Send Support Ticket / Message</h3>
+                        <form onsubmit="sendMessage(event)">
+                            <div class="form-group">
+                                <label>Your Full Name</label>
+                                <input type="text" required placeholder="Ex: Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" required placeholder="Ex: jane@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Inquiry Type</label>
+                                <select required>
+                                    <option value="">-- Select Category --</option>
+                                    <option value="General Question">General Question</option>
+                                    <option value="Appointment Issue">Appointment/Channeling Issue</option>
+                                    <option value="Order Tracking">Store / Order Tracking Issue</option>
+                                    <option value="Technical Error">System Bug / Technical Error</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Message / Description</label>
+                                <textarea required placeholder="Write your problem or feedback here detailed..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Ticket</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <footer class="system-footer">
+                <p>&copy; 2026 OPTICAL Eyecare Management System. All Rights Reserved.</p>
+                <p style="font-size: 12px; color: #94a3b8;">HNDIT Software Engineering Project</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            const ticketNum = "TCK" + Math.floor(10000 + Math.random() * 90000);
+            alert(`✉️ Ticket Submitted!\n\nThank you! Your support request has been submitted directly to the Admin.\nYour Support Reference ID: ${ticketNum}\n\nOur team will review this within 24 working hours.`);
+            event.target.reset(); // clear form
+        }
+    </script>
+</body>
+</html>

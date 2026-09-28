@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSMS - Customer Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <div class="navbar">
+            <h2>OSMS Dashboard</h2>
+            <div class="user-info">
+                Welcome, <span id="userName">Guest</span>! 
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="card">
+                <h3>Book a New Appointment</h3>
+                <form id="bookAppointmentForm">
+                    <div class="form-group">
+                        <label>Select Date</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Time</label>
+                        <input type="time" id="appointmentTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes / Symptoms</label>
+                        <textarea id="appointmentNotes" placeholder="Describe your eye condition..." rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+                    </div>
+                    <button type="submit" class="auth-btn">Book Appointment</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Your Booked Appointments</h3>
+                <div id="appointmentsList" class="list-container">
+                    <p>No appointments booked yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="appointment-section mt-4" style="margin-top: 20px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h3 style="color: #333; margin-bottom: 15px;"><i class="fas fa-file-medical" style="color: #6f42c1; margin-right: 10px;"></i>My Prescriptions</h3>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                        <th style="padding: 12px;">Date</th>
+                        <th style="padding: 12px;">Doctor</th>
+                        <th style="padding: 12px;">Diagnosis</th>
+                        <th style="padding: 12px;">Medication</th>
+                    </tr>
+                </thead>
+                <tbody id="prescriptionTableBody">
+                    <tr>
+                        <td colspan="4" style="padding: 15px; text-align: center; color: #777;">Loading prescriptions...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

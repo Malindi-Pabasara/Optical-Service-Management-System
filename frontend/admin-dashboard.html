@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Medical & Optician System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-danger shadow mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-user-shield me-2"></i>System Admin Panel</a>
+            <button class="btn btn-outline-light btn-sm" onclick="adminLogout()"><i class="fas fa-sign-out-alt me-1"></i>Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card bg-primary text-white shadow-sm border-0">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title opacity-75">Total Doctors</h5>
+                            <h2 class="display-6 fw-bold" id="totalDoctors">0</h2>
+                        </div>
+                        <i class="fas fa-user-md fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-success text-white shadow-sm border-0">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title opacity-75">Registered Patients</h5>
+                            <h2 class="display-6 fw-bold" id="totalPatients">0</h2>
+                        </div>
+                        <i class="fas fa-user-injured fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0"><i class="fas fa-users-cog me-2"></i>Manage System Users</h5>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="doctors-tab" data-bs-toggle="tab" data-bs-target="#doctorsSection" type="button">Doctors (වෛද්‍යවරු)</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="patients-tab" data-bs-toggle="tab" data-bs-target="#patientsSection" type="button">Patients (රෝගීන්)</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content mt-3" id="adminTabsContent">
+                    <div class="tab-pane fade show active" id="doctorsSection" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Doctor Name</th>
+                                        <th>Specialization</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminDoctorsTable">
+                                    <tr><td colspan="4" class="text-center text-muted">Loading doctors...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="patientsSection" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminPatientsTable">
+                                    <tr><td colspan="4" class="text-center text-muted">Loading patients...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

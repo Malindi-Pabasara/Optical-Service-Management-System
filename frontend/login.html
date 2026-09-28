@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSMS - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Welcome Back</h2>
+        <p>Login to your OSMS account</p>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="emailInput" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+        
+        <p class="auth-link">Don't have an account? <a href="register.html">Register Here</a></p>
+    </div>
+
+    <script>
+    async function handleLogin(event) {
+        event.preventDefault(); // Page refresh 
+
+        const email = document.getElementById('emailInput').value.trim();
+        const password = document.getElementById('passwordInput').value;
+
+        try {
+            // Port 5000 Backend API Request 
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // sessionStorage
+                sessionStorage.setItem("userToken", data.token);
+                sessionStorage.setItem("userRole", data.user.role); 
+                sessionStorage.setItem("userName", data.user.name); 
+
+                alert("🎉 Login Successful!");
+                
+                // index.html (Dashboard Overview) 
+                window.location.href = "index.html"; 
+
+            } else {
+                // Backend Message 
+                alert("❌ Login Failed: " + (data.message || "Invalid credentials"));
+            }
+
+        } catch (error) {
+            console.error("Error during login:", error);
+            alert("❌ Cannot connect to backend server. Make sure your node server is running on port 5000!");
+        }
+    }
+    </script>
+</body>
+</html>

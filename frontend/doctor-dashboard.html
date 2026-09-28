@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSMS - Doctor Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <div class="navbar">
+            <h2>OSMS Doctor Dashboard</h2>
+            <div class="user-info">
+                Welcome, <span id="doctorName">Doctor</span>! 
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="card">
+                <h3>All Patient Appointments</h3>
+                <div id="allAppointmentsList" class="list-container">
+                    <p>Loading appointments...</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Add New Prescription</h3>
+                <form id="addPrescriptionForm">
+                    <input type="hidden" id="selectedAppointmentId">
+                    <input type="hidden" id="selectedPatientId">
+                    
+                    <div class="form-group">
+                        <label>Patient Name: <strong id="patientNameDisplay">-</strong></label>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label>Left Eye (OS) Sphere</label>
+                            <input type="text" id="leftSphere" placeholder="-1.25" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Right Eye (OD) Sphere</label>
+                            <input type="text" id="rightSphere" placeholder="-1.50" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Doctor's Advice / Notes</label>
+                        <textarea id="prescriptionNotes" placeholder="Wear glasses constantly, anti-glare recommended..." rows="3" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+                    </div>
+                    <button type="submit" class="auth-btn" style="background-color: #2ecc71;">Save Prescription</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/doctor-dashboard.js"></script>
+</body>
+</html>

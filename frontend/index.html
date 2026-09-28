@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTICAL eyecare - Dashboard Overview</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { display: flex; height: 100vh; background-color: #f4f6f9; overflow: hidden; }
+
+        /* ====== SIDEBAR STYLING ====== */
+        .sidebar {
+            width: 260px; background-color: #1e293b; color: #cbd5e1;
+            display: flex; flex-direction: column; justify-content: space-between;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .sidebar-brand { padding: 24px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #334155; }
+        .sidebar-brand h1 { font-size: 20px; color: #fff; font-weight: bold; }
+        .sidebar-brand span { font-size: 11px; color: #00d2ff; text-transform: uppercase; display: block; }
+        
+        .sidebar-menu { list-style: none; padding: 20px 0; flex-grow: 1; }
+        .sidebar-menu li a {
+            display: flex; align-items: center; gap: 15px; padding: 14px 24px;
+            color: #94a3b8; text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.3s;
+        }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active { background-color: #334155; color: #fff; border-left: 4px solid #00d2ff; }
+
+        /* ====== MAIN WRAPPER ====== */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        
+        .top-navbar {
+            height: 70px; background-color: #fff; display: flex; justify-content: space-between;
+            align-items: center; padding: 0 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 10;
+        }
+        .user-badge { font-weight: bold; color: #1e293b; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .user-role-lbl { background: #e2e8f0; padding: 4px 10px; border-radius: 50px; font-size: 12px; color: #475569; text-transform: uppercase; }
+        .nav-btn-logout { background-color: #ef4444; color: white; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .nav-btn-logout:hover { background-color: #dc2626; }
+
+        /* ====== CONTENT BODY ====== */
+        .content-body { padding: 40px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        .welcome-banner { color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+        .banner-customer { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-bottom: 4px solid #00d2ff; }
+        .banner-doctor { background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); border-bottom: 4px solid #10b981; }
+        .banner-admin { background: linear-gradient(135deg, #450a0a 0%, #180202 100%); border-bottom: 4px solid #ef4444; }
+
+        /* Cards Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); text-align: center; border: 1px solid #e2e8f0; }
+        .card i { font-size: 40px; margin-bottom: 15px; }
+        .card-btn { display: block; color: white; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px; margin-top: 15px; transition: 0.2s; }
+
+        .system-footer { background-color: #fff; padding: 20px 0; text-align: center; color: #64748b; font-size: 14px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                <i class="fas fa-glasses" style="font-size: 32px; color: #00d2ff;"></i>
+                <div>
+                    <h1>OPTICAL</h1>
+                    <span>eyecare system</span>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu" id="mainSidebarMenu">
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <header class="top-navbar">
+            <div class="user-badge">
+                <i class="fas fa-user-circle" style="font-size: 22px; color:#64748b;"></i>
+                <span id="topNavWelcomeName">Loading User...</span>
+                <span class="user-role-lbl" id="topNavRoleLabel">Guest</span>
+            </div>
+            <a href="login.html" onclick="sessionStorage.clear();" class="nav-btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </header>
+
+        <div class="content-body">
+            <div>
+                <div class="welcome-banner" id="welcomeBannerSection">
+                    <h2 id="bannerTitle">Welcome</h2>
+                    <p id="bannerDesc">Loading interface details...</p>
+                </div>
+
+                <h3 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-th-large"></i> Quick Actions Menu</h3>
+                <div class="cards-grid" id="dynamicCardsContainer">
+                </div>
+            </div>
+
+            <footer class="system-footer">
+                <p>&copy; 2026 OPTICAL Eyecare Management System. All Rights Reserved.</p>
+                <p style="font-size: 12px; color: #94a3b8;" id="footerProjectLabel">HNDIT Project</p>
+            </footer>
+        </div>
+    </div>
+
+    <div id="chatCircle" onclick="toggleChat()" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, #00d2ff, #00b4db); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,210,255,0.4); z-index: 2000; transition: 0.3s;">
+        <i class="fas fa-comment-dots" id="chatIcon"></i>
+    </div>
+
+    <div id="chatBox" style="position: fixed; bottom: 100px; right: 30px; width: 350px; height: 450px; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: flex; flex-direction: column; overflow: hidden; z-index: 2000; display: none; border: 1px solid #e2e8f0;">
+        <div style="background: #1e293b; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 10px; height: 10px; background: #10b981; border-radius: 50%;"></div>
+                <strong>OPTICAL AI Assistant</strong>
+            </div>
+            <i class="fas fa-times" onclick="toggleChat()" style="cursor: pointer; color: #94a3b8;"></i>
+        </div>
+
+        <div id="chatMessages" style="flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f8fafc;">
+            <div style="align-self: flex-start; background: #e2e8f0; color: #1e293b; padding: 10px 14px; border-radius: 12px 12px 12px 0; max-width: 80%; font-size: 14px;">
+                Hello! I am your Optical Eyecare Assistant. How can I help you today?
+            </div>
+        </div>
+
+        <form onsubmit="sendChatMessage(event)" style="display: flex; padding: 10px; border-top: 1px solid #e2e8f0; background: white;">
+            <input type="text" id="chatInput" placeholder="Ask something..." required style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; font-size: 14px;">
+            <button type="submit" style="background: #1e293b; color: #00d2ff; border: none; padding: 0 15px; border-radius: 6px; margin-left: 8px; cursor: pointer;">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+    <script>
+        window.onload = function() {
+            
+            const role = sessionStorage.getItem("userRole") || "customer"; 
+            const name = sessionStorage.getItem("userName") || "Valued Customer";
+
+            document.getElementById("topNavWelcomeName").innerText = name;
+            document.getElementById("topNavRoleLabel").innerText = role;
+
+            const sidebarMenu = document.getElementById("mainSidebarMenu");
+            const banner = document.getElementById("welcomeBannerSection");
+            const bannerTitle = document.getElementById("bannerTitle");
+            const bannerDesc = document.getElementById("bannerDesc");
+            const cardsContainer = document.getElementById("dynamicCardsContainer");
+            const footerLabel = document.getElementById("footerProjectLabel");
+
+            // ==================== INTERFACE 1: ADMIN ====================
+            if (role === "admin") {
+                banner.className = "welcome-banner banner-admin";
+                bannerTitle.innerText = "Admin Control Center Panel";
+                bannerDesc.innerText = "System management dashboard. Monitor operations, add staff, manage optical store stocks and view revenue analytics.";
+                footerLabel.innerText = "HNDIT Software Engineering Project [ADMIN MODE]";
+
+                sidebarMenu.innerHTML = `
+                    <li><a href="index.html" class="active"><i class="fas fa-chart-line"></i> Admin Home</a></li>
+                    <li><a href="admin-dashboard.html"><i class="fas fa-users-cog"></i> Manage Users</a></li>
+                    <li><a href="inventory.html"><i class="fas fa-boxes"></i> Store Stock</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope-open-text"></i> User Tickets</a></li>
+                `;
+
+                cardsContainer.innerHTML = `
+                    <div class="card" style="border-top: 4px solid #ef4444;">
+                        <i class="fas fa-users" style="color: #ef4444;"></i>
+                        <h4>System Users</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Doctors, staff & patients.</p>
+                        <a href="admin-dashboard.html" class="card-btn" style="background:#ef4444;">Manage Users</a>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #3b82f6;">
+                        <i class="fas fa-cubes" style="color: #3b82f6;"></i>
+                        <h4>Inventory Logs</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Manage frames & lenses stock.</p>
+                        <a href="inventory.html" class="card-btn" style="background:#3b82f6;">View Inventory</a>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #10b981;">
+                        <i class="fas fa-wallet" style="color: #10b981;"></i>
+                        <h4>Income & Sales</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Check revenue reports.</p>
+                        <a href="#" class="card-btn" style="background:#10b981;" onclick="alert('Opening Income Statement...')">View Reports</a>
+                    </div>
+                `;
+            } 
+            
+            // ==================== INTERFACE 2: DOCTOR ====================
+            else if (role === "doctor") {
+                banner.className = "welcome-banner banner-doctor";
+                bannerTitle.innerText = "Doctor Consultation Portal";
+                bannerDesc.innerText = "Welcome back, Doctor. Check your channeling appointments list, view patient eye history records and write new digital prescriptions.";
+                footerLabel.innerText = "HNDIT Software Engineering Project [DOCTOR MODE]";
+
+                sidebarMenu.innerHTML = `
+                    <li><a href="index.html" class="active"><i class="fas fa-stethoscope"></i> Doctor Home</a></li>
+                    <li><a href="doctor-dashboard.html"><i class="fas fa-calendar-check"></i> My Appointments</a></li>
+                    <li><a href="history.html"><i class="fas fa-book-medical"></i> Medical Records</a></li>
+                `;
+
+                cardsContainer.innerHTML = `
+                    <div class="card" style="border-top: 4px solid #10b981;">
+                        <i class="fas fa-calendar-alt" style="color: #10b981;"></i>
+                        <h4>Today Appointments</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Check scheduled channels.</p>
+                        <a href="doctor-dashboard.html" class="card-btn" style="background:#10b981;">View Schedule</a>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #f59e0b;">
+                        <i class="fas fa-notes-medical" style="color: #f59e0b;"></i>
+                        <h4>Issue Prescriptions</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Add lens sphere powers.</p>
+                        <a href="history.html" class="card-btn" style="background:#f59e0b;">Open History</a>
+                    </div>
+                `;
+            } 
+            
+            // ==================== INTERFACE 3: CUSTOMER / PATIENT ====================
+            else {
+                banner.className = "welcome-banner banner-customer";
+                bannerTitle.innerText = "Patient Portal & Overview";
+                bannerDesc.innerText = "Everything you need for perfect vision care. Place orders for frames, secure appointment slots with leading optometrists and track your health records.";
+                footerLabel.innerText = "HNDIT Software Engineering Project [PATIENT MODE]";
+
+                sidebarMenu.innerHTML = `
+                    <li><a href="index.html" class="active"><i class="fas fa-th-large"></i> Overview Home</a></li>
+                    <li><a href="dashboard.html"><i class="fas fa-user"></i> My Dashboard</a></li>
+                    <li><a href="inventory.html"><i class="fas fa-store"></i> Glasses Store</a></li>
+                    <li><a href="booking.html"><i class="fas fa-user-md"></i> Doctor Booking</a></li>
+                    <li><a href="history.html"><i class="fas fa-notes-medical"></i> Medical History</a></li>
+                    <li><a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a></li>
+                `;
+
+                cardsContainer.innerHTML = `
+                    <div class="card" style="border-top: 4px solid #00d2ff;">
+                        <i class="fas fa-user-md" style="color: #00d2ff;"></i>
+                        <h4>Book a Doctor</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Channel eye specialists.</p>
+                        <a href="booking.html" class="card-btn" style="background:#00d2ff;">Book Appointment</a>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #6f42c1;">
+                        <i class="fas fa-store" style="color: #6f42c1;"></i>
+                        <h4>Order Spectacles</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">Buy frames and contact lenses.</p>
+                        <a href="inventory.html" class="card-btn" style="background:#6f42c1;">Shop Catalog</a>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #334155;">
+                        <i class="fas fa-file-prescription" style="color: #334155;"></i>
+                        <h4>Medical History</h4>
+                        <p style="color:#64748b; font-size:13px; margin:8px 0;">View old eye check reports.</p>
+                        <a href="history.html" class="card-btn" style="background:#334155;">My History</a>
+                    </div>
+                `;
+            }
+        };
+
+        // CHATBOT FUNCTIONS
+        function toggleChat() {
+            const chatBox = document.getElementById("chatBox");
+            const chatIcon = document.getElementById("chatIcon");
+            if (chatBox.style.display === "none" || chatBox.style.display === "") {
+                chatBox.style.display = "flex";
+                chatIcon.className = "fas fa-times";
+            } else {
+                chatBox.style.display = "none";
+                chatIcon.className = "fas fa-comment-dots";
+            }
+        }
+
+        async function sendChatMessage(event) {
+            event.preventDefault();
+            const inputField = document.getElementById("chatInput");
+            const messageContainer = document.getElementById("chatMessages");
+            const userText = inputField.value.trim();
+            if (!userText) return;
+
+            const userDiv = document.createElement("div");
+            userDiv.style = "align-self: flex-end; background: #1e293b; color: white; padding: 10px 14px; border-radius: 12px 12px 0 12px; max-width: 80%; font-size: 14px;";
+            userDiv.innerText = userText;
+            messageContainer.appendChild(userDiv);
+            
+            inputField.value = "";
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+
+            const loadingDiv = document.createElement("div");
+            loadingDiv.style = "align-self: flex-start; background: #e2e8f0; color: #64748b; padding: 10px 14px; border-radius: 12px 12px 12px 0; max-width: 80%; font-size: 14px; font-style: italic;";
+            loadingDiv.innerText = "AI is thinking...";
+            messageContainer.appendChild(loadingDiv);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+
+            const aiResponse = await getAIResponse(userText);
+            messageContainer.removeChild(loadingDiv);
+            
+            const aiDiv = document.createElement("div");
+            aiDiv.style = "align-self: flex-start; background: #e2e8f0; color: #1e293b; padding: 10px 14px; border-radius: 12px 12px 12px 0; max-width: 80%; font-size: 14px;";
+            aiDiv.innerText = aiResponse;
+            messageContainer.appendChild(aiDiv);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+
+        async function getAIResponse(userQuery) {
+            const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+            
+            if (API_KEY !== "YOUR_GEMINI_API_KEY_HERE" && API_KEY !== "") {
+                try {
+                    const prompt = `You are an AI assistant for "OPTICAL eyecare system". Answer briefly: ${userQuery}`;
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (error) {
+                    return "Sorry, I am facing a connection issue.";
+                }
+            } else {
+                const query = userQuery.toLowerCase();
+                if (query.includes("hello") || query.includes("hi")) {
+                    return "Hi there! Welcome to OPTICAL Eyecare. How can I help you today?";
+                } else if (query.includes("doctor") || query.includes("channel")) {
+                    return "You can book an eye specialist doctor by navigating to the 'Doctor Booking' page.";
+                } else if (query.includes("price") || query.includes("glasses")) {
+                    return "Our frame prices start from LKR 3,800. Visit the 'Glasses Store' to see our collection.";
+                } else {
+                    return "Thank you for asking. For advanced inquiries, please use our contact section.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

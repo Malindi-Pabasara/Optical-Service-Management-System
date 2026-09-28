@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPTICAL eyecare - Doctor Channeling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f6f9;
+            overflow: hidden;
+        }
+
+        /* ====== LEFT SIDEBAR ====== */
+        .sidebar {
+            width: 260px;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-brand h1 { font-size: 20px; color: #fff; font-weight: bold; }
+        .sidebar-brand span { font-size: 11px; color: #00d2ff; text-transform: uppercase; display: block; }
+
+        .sidebar-menu { list-style: none; padding: 20px 0; flex-grow: 1; }
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 24px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: #334155;
+            color: #fff;
+            border-left: 4px solid #00d2ff;
+        }
+
+        /* ====== MAIN CONTENT AREA ====== */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header Navbar */
+        .top-navbar {
+            height: 70px;
+            background-color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .nav-btn-dash { color: #334155; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .nav-btn-dash:hover { color: #00d2ff; }
+        .nav-btn-logout { background-color: #ef4444; color: white; padding: 8px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .nav-btn-logout:hover { background-color: #dc2626; }
+
+        /* Dashboard Content Container */
+        .content-body {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #00b4db;
+        }
+
+        /* ====== BOOKING PAGE LAYOUT ====== */
+        .booking-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        /* Doctors Grid */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .doc-mini-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .doc-mini-card:hover {
+            border-color: #00b4db;
+            background: #f0fdfa;
+        }
+
+        .doc-icon {
+            width: 45px;
+            height: 45px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #475569;
+        }
+
+        /* Form styling */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #334155; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .submit-btn { background: #00b4db; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
+        .submit-btn:hover { background: #009cbd; }
+
+        /* ====== SYSTEM FOOTER ====== */
+        .system-footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                <i class="fas fa-glasses" style="font-size: 32px; color: #00d2ff;"></i>
+                <div>
+                    <h1>OPTICAL</h1>
+                    <span>eyecare system</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fas fa-th-large"></i> Overview Home</a></li>
+                <li><a href="inventory.html"><i class="fas fa-store"></i> Glasses Store</a></li>
+                <li><a href="booking.html" class="active"><i class="fas fa-user-md"></i> Doctor Booking</a></li>
+                <li><a href="history.html"><i class="fas fa-notes-medical"></i> Medical History</a></li>
+                <li><a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <header class="top-navbar">
+            <a href="dashboard.html" class="nav-btn-dash"><i class="fas fa-user-circle" style="font-size: 20px;"></i> Dashboard</a>
+            <a href="login.html" class="nav-btn-logout">Logout</a>
+        </header>
+
+        <div class="content-body">
+            <div>
+                <div class="welcome-banner">
+                    <h2>Doctor Channeling & Appointments</h2>
+                    <p>Select your preferred eye specialist and fill out the form to secure your appointment time slot.</p>
+                </div>
+
+                <div class="booking-container">
+                    
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 15px;"><i class="fas fa-user-md" style="color: #00b4db;"></i> 1. Select Available Eye Specialist</h3>
+                        <div class="doc-grid">
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. Anura Perera')">
+                                <div class="doc-icon"><i class="fas fa-user-md"></i></div>
+                                <div><h4>Dr. Anura Perera</h4><small style="color: #64748b;">Senior Optometrist</small></div>
+                            </div>
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. Priyanthi Silva')">
+                                <div class="doc-icon" style="color:#00b4db;"><i class="fas fa-user-nurse"></i></div>
+                                <div><h4>Dr. Priyanthi Silva</h4><small style="color: #64748b;">Pediatric Eye Expert</small></div>
+                            </div>
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. K. R. Fernando')">
+                                <div class="doc-icon"><i class="fas fa-user-md"></i></div>
+                                <div><h4>Dr. K. R. Fernando</h4><small style="color: #64748b;">Contact Lens Expert</small></div>
+                            </div>
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. Shalini Jayawardena')">
+                                <div class="doc-icon" style="color:#00b4db;"><i class="fas fa-user-nurse"></i></div>
+                                <div><h4>Dr. Shalini Jayawardena</h4><small style="color: #64748b;">Laser Surgeon</small></div>
+                            </div>
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. Mahinda Alwis')">
+                                <div class="doc-icon"><i class="fas fa-user-md"></i></div>
+                                <div><h4>Dr. Mahinda Alwis</h4><small style="color: #64748b;">Glaucoma Specialist</small></div>
+                            </div>
+                            <div class="doc-mini-card" onclick="selectDoctor('Dr. N. Wickramasinghe')">
+                                <div class="doc-icon" style="color:#00b4db;"><i class="fas fa-user-nurse"></i></div>
+                                <div><h4>Dr. N. Wickramasinghe</h4><small style="color: #64748b;">General Eye Care</small></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: #1e293b; margin-bottom: 15px;"><i class="fas fa-file-medical"></i> 2. Appointment Form</h3>
+                        <form onsubmit="bookAppointment(event)">
+                            <div class="form-group">
+                                <label>Selected Specialist</label>
+                                <input type="text" id="selectedDoc" readonly value="Click a doctor to choose" style="background: #f1f5f9; font-weight: bold; color: #00b4db;">
+                            </div>
+                            <div class="form-group">
+                                <label>Patient Full Name</label>
+                                <input type="text" required placeholder="Ex: John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="tel" required placeholder="07xxxxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Date</label>
+                                <input type="date" required id="bookDate">
+                            </div>
+                            <button type="submit" class="submit-btn">Confirm Appointment</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <footer class="system-footer">
+                <p>&copy; 2026 OPTICAL Eyecare Management System. All Rights Reserved.</p>
+                <p style="font-size: 12px; color: #94a3b8;">HNDIT Software Engineering Project</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Set minimum date to today automatically
+        document.getElementById('bookDate').min = new Date().toISOString().split('T');
+
+        function selectDoctor(docName) {
+            document.getElementById('selectedDoc').value = docName;
+        }
+
+        function bookAppointment(event) {
+            event.preventDefault();
+            const doc = document.getElementById('selectedDoc').value;
+            if (doc === "Click a doctor to choose") {
+                alert("Please select a Doctor first from the left panel!");
+                return;
+            }
+            const appId = "APT" + Math.floor(1000 + Math.random() * 9000);
+            alert(`🎉 Appointment Successful!\n\nYour appointment with ${doc} has been successfully registered.\nYour Appointment ID is: ${appId}`);
+        }
+    </script>
+</body>
+</html>
